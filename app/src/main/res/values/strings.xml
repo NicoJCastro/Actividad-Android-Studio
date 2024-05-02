@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AO1CastroNicolas</string>
+    <!-- Texto del botón de retroceso -->
+    <string name="back_button">Retroceso</string>
+
+    <!-- Texto del botón de guardar contacto -->
+    <string name="save_contact">Guardar contacto</string>
+</resources>
