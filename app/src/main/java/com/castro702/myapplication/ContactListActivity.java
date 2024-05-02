@@ -34,54 +34,42 @@ public class ContactListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_list);
 
-        // Configurar RecyclerView
         recyclerView = findViewById(R.id.recyclerViewContactos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Crear el adaptador solo una vez
         adapter = new ContactoAdapter(ContactStorage.getListaContactos());
         recyclerView.setAdapter(adapter);
 
-        // Inicializar elementos de estado vacío
         emptyStateIcon = findViewById(R.id.emptyStateIcon);
         emptyStateMessage = findViewById(R.id.emptyStateMessage);
 
-        // Mostrar elementos de estado vacío si la lista de contactos está vacía
-        actualizarVistaContactos();
+        updateContactsView();
 
-        // Encuentra el botón flotante por su ID
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        // Establece un OnClickListener al botón flotante
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Crea un Intent para abrir la activity_contact_list
+
                 Intent intent = new Intent(ContactListActivity.this, activity_contact_list.class);
                 intent.putExtra("listaContactos", new ArrayList<>(ContactStorage.getListaContactos()));
                 startActivityForResult(intent, 1); // Iniciar activity_contact_list con startActivityForResult
             }
         });
-
-        // Encuentra el EditText por su ID
         EditText searchEditText = findViewById(R.id.searchEditText);
-
-        // Establece un TextWatcher al EditText
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No necesitamos hacer nada aquí
-            }
 
+            }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Aquí es donde actualizamos el filtro de nuestro adaptador
+
                 adapter.getFilter().filter(s);
             }
-
             @Override
             public void afterTextChanged(Editable s) {
-                // No necesitamos hacer nada aquí
+
             }
         });
     }
@@ -89,37 +77,34 @@ public class ContactListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Actualizar la vista de acuerdo a la presencia o ausencia de contactos
-        actualizarVistaContactos();
+
+        updateContactsView();
     }
 
-    // Método para actualizar la vista de acuerdo a la presencia o ausencia de contactos
-    private void actualizarVistaContactos() {
+    private void updateContactsView() {
         if (ContactStorage.getListaContactos().isEmpty()) {
-            // Si la lista está vacía, mostrar elementos de estado vacío
+
             emptyStateIcon.setVisibility(View.VISIBLE);
             emptyStateMessage.setVisibility(View.VISIBLE);
             Log.d("ContactListActivity", "Lista de contactos está vacía");
         } else {
-            // Si la lista no está vacía, ocultar elementos de estado vacío
+
             emptyStateIcon.setVisibility(View.GONE);
             emptyStateMessage.setVisibility(View.GONE);
             Log.d("ContactListActivity", "Lista de contactos no está vacía");
         }
     }
-
-    // Método para actualizar la lista de contactos en el adaptador
-    public void actualizarListaContactos() {
+    public void updateContactsList() {
         adapter.notifyDataSetChanged();
-        actualizarVistaContactos();
+        updateContactsView();
     }
 
-    // Método para recibir resultados de activity_contact_list
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
-            actualizarListaContactos();
+            updateContactsList();
         }
     }
 }

@@ -62,7 +62,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Nombre -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             android:hint="Nombre"
             android:minHeight="48dp" />
 
-        <!-- Apellido -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
             android:hint="Apellido"
             android:minHeight="48dp" />
 
-        <!-- Teléfono -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
             android:inputType="phone"
             android:minHeight="48dp" />
 
-        <!-- Domicilio -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
             android:hint="Domicilio"
             android:minHeight="48dp" />
 
-        <!-- Email -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
             android:inputType="textEmailAddress"
             android:minHeight="48dp" />
 
-        <!-- Género -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -21,7 +21,7 @@ public class activity_contact_list extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        // Inicializar vistas
+
         editTextNombre = findViewById(R.id.editTextNombre);
         editTextApellido = findViewById(R.id.editTextApellido);
         editTextTelefono = findViewById(R.id.editTextTelefono);
@@ -29,15 +29,15 @@ public class activity_contact_list extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         radioGroupGenero = findViewById(R.id.radioGroupGenero);
 
-        // Configurar el listener del botón de guardar
+
         findViewById(R.id.saveContactIcon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                guardarContacto();
+                saveContacto();
             }
         });
 
-        // Configurar el listener del botón de retroceso
+
         findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,38 +46,29 @@ public class activity_contact_list extends AppCompatActivity {
         });
     }
 
-    private void guardarContacto() {
-        // Obtener los valores de los campos de entrada
+    private void saveContacto() {
+
         String nombre = editTextNombre.getText().toString().trim();
         String apellido = editTextApellido.getText().toString().trim();
         String telefono = editTextTelefono.getText().toString().trim();
         String domicilio = editTextDomicilio.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
-        String genero = obtenerGeneroSeleccionado();
+        String genero = getSelectedGenre();
 
-        // Validar que los campos no estén vacíos
+
         if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || domicilio.isEmpty() || email.isEmpty() || genero.isEmpty()) {
             Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        // Agregar el nuevo contacto a la lista (utilizando la clase ContactStorage)
-        Contacto nuevoContacto = new Contacto(nombre, apellido, telefono);
-        ContactStorage.agregarContacto(nuevoContacto);
-
-        // Establecer resultado y finalizar activity_contact_list
+        Contacto newContacto = new Contacto(nombre, apellido, telefono);
+        ContactStorage.agregarContacto(newContacto);
         setResult(RESULT_OK);
         finish();
     }
 
-    private String obtenerGeneroSeleccionado() {
-        // Obtener el ID del RadioButton seleccionado
+    private String getSelectedGenre() {
         int radioButtonId = radioGroupGenero.getCheckedRadioButtonId();
-
-        // Obtener el RadioButton seleccionado
         RadioButton radioButton = findViewById(radioButtonId);
-
-        // Obtener el texto del RadioButton seleccionado
         return radioButton != null ? radioButton.getText().toString() : "";
     }
 }

@@ -26,7 +26,7 @@ public class Contacto implements Parcelable {
         return telefono;
     }
 
-    // Implementación de Parcelable
+
     protected Contacto(Parcel in) {
         nombre = in.readString();
         apellido = in.readString();
