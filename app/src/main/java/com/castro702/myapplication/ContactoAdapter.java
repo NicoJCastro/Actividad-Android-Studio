@@ -95,9 +95,6 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
         // Agregar el nuevo contacto a la lista
         this.listaContactos.add(nuevoContacto);
 
-        // Actualizar la lista filtrada
-        this.listaContactosFiltrados = this.listaContactos;
-
         // Notificar al RecyclerView que los datos han cambiado
         notifyDataSetChanged();
     }

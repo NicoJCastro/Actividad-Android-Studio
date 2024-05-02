@@ -58,12 +58,10 @@ public class ContactListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Crea un Intent para abrir la activity_contact_list
                 Intent intent = new Intent(ContactListActivity.this, activity_contact_list.class);
-                startActivity(intent); // Inicia la nueva activity
-
+                intent.putExtra("listaContactos", new ArrayList<>(ContactStorage.getListaContactos()));
+                startActivityForResult(intent, 1); // Iniciar activity_contact_list con startActivityForResult
             }
-
         });
-
 
         // Encuentra el EditText por su ID
         EditText searchEditText = findViewById(R.id.searchEditText);
@@ -91,9 +89,9 @@ public class ContactListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // Actualizar la vista de acuerdo a la presencia o ausencia de contactos
         actualizarVistaContactos();
     }
-
 
     // Método para actualizar la vista de acuerdo a la presencia o ausencia de contactos
     private void actualizarVistaContactos() {
@@ -110,5 +108,18 @@ public class ContactListActivity extends AppCompatActivity {
         }
     }
 
+    // Método para actualizar la lista de contactos en el adaptador
+    public void actualizarListaContactos() {
+        adapter.notifyDataSetChanged();
+        actualizarVistaContactos();
+    }
 
+    // Método para recibir resultados de activity_contact_list
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            actualizarListaContactos();
+        }
+    }
 }
