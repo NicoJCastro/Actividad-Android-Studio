@@ -1,6 +1,8 @@
 package com.castro702.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            Intent intent = new Intent(MainActivity.this, ContactListActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
         etUsername = findViewById(R.id.etUsername);
@@ -26,15 +39,19 @@ public class MainActivity extends AppCompatActivity {
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
+
                 //Usuario=admin, contraseña=1234
                 if (username.equals("admin") && password.equals("1234")) {
 
+                    SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.apply();
+
                     Intent intent = new Intent(MainActivity.this, ContactListActivity.class);
                     startActivity(intent);
-
                     finish();
                 } else {
-
                     Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
                 }
             }

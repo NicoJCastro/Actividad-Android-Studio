@@ -26,18 +26,12 @@
             android:minHeight="48dp" />
 
         <ImageView
-            android:id="@+id/searchIcon"
+            android:id="@+id/closeSession"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/ic_search" />
+            android:src="@drawable/ic_close_session" />
 
-        <ImageView
-            android:id="@+id/moreOptionsIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/ic_more_options" />
 
     </LinearLayout>
 

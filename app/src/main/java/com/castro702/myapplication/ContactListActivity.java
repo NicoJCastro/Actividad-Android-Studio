@@ -1,6 +1,7 @@
 package com.castro702.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -43,6 +44,7 @@ public class ContactListActivity extends AppCompatActivity {
         emptyStateIcon = findViewById(R.id.emptyStateIcon);
         emptyStateMessage = findViewById(R.id.emptyStateMessage);
 
+
         updateContactsView();
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -53,7 +55,7 @@ public class ContactListActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(ContactListActivity.this, activity_contact_list.class);
                 intent.putExtra("listaContactos", new ArrayList<>(ContactStorage.getListaContactos()));
-                startActivityForResult(intent, 1); // Iniciar activity_contact_list con startActivityForResult
+                startActivityForResult(intent, 1);
             }
         });
         EditText searchEditText = findViewById(R.id.searchEditText);
@@ -72,6 +74,22 @@ public class ContactListActivity extends AppCompatActivity {
 
             }
         });
+
+        ImageView closeSession = findViewById(R.id.closeSession);
+        closeSession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences = getSharedPreferences("UsersPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("isLoggedIn", false);
+                editor.apply();
+
+                Intent intent = new Intent(ContactListActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     @Override
@@ -107,4 +125,5 @@ public class ContactListActivity extends AppCompatActivity {
             updateContactsList();
         }
     }
+
 }
