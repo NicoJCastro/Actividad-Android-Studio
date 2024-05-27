@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("Nico", MODE_PRIVATE);
         boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
 
         if (isLoggedIn) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 //Usuario=admin, contraseña=1234
                 if (username.equals("admin") && password.equals("1234")) {
 
-                    SharedPreferences preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                    SharedPreferences preferences = getSharedPreferences("Nico", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putBoolean("isLoggedIn", true);
                     editor.apply();

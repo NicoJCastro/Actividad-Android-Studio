@@ -93,6 +93,7 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
     }
     public void addContact(Contacto nuevoContacto) {
         this.listaContactos.add(nuevoContacto);
+        this.listaContactosFiltrados = new ArrayList<>(this.listaContactos);
         notifyDataSetChanged();
     }
 }

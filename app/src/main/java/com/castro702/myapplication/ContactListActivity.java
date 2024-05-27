@@ -38,7 +38,11 @@ public class ContactListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewContactos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new ContactoAdapter(ContactStorage.getListaContactos());
+
+         //ACA PUEDE ESTAR EL PROBLEMA
+
+        dbHelper dbHelper = new dbHelper(this);
+        adapter = new ContactoAdapter(dbHelper.getAllContacts());
         recyclerView.setAdapter(adapter);
 
         emptyStateIcon = findViewById(R.id.emptyStateIcon);
@@ -54,10 +58,11 @@ public class ContactListActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(ContactListActivity.this, activity_contact_list.class);
-                intent.putExtra("listaContactos", new ArrayList<>(ContactStorage.getListaContactos()));
+               // intent.putExtra("listaContactos", new ArrayList<>(ContactStorage.getListaContactos()));
                 startActivityForResult(intent, 1);
             }
         });
+
         EditText searchEditText = findViewById(R.id.searchEditText);
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -79,10 +84,12 @@ public class ContactListActivity extends AppCompatActivity {
         closeSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = getSharedPreferences("UsersPrefs", MODE_PRIVATE);
+                Log.d("ContactListActivity", "Botón de cerrar sesión pulsado");
+                SharedPreferences preferences = getSharedPreferences("Nico", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("isLoggedIn", false);
                 editor.apply();
+                Log.d("ContactListActivity", "Estado de sesión actualizado en SharedPreferences");
 
                 Intent intent = new Intent(ContactListActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -100,20 +107,23 @@ public class ContactListActivity extends AppCompatActivity {
     }
 
     private void updateContactsView() {
-        if (ContactStorage.getListaContactos().isEmpty()) {
+        dbHelper dbHelper = new dbHelper(this);
+        List<Contacto> contactos = dbHelper.getAllContacts();
 
+        if (contactos.isEmpty()) {
             emptyStateIcon.setVisibility(View.VISIBLE);
             emptyStateMessage.setVisibility(View.VISIBLE);
             Log.d("ContactListActivity", "Lista de contactos está vacía");
         } else {
-
             emptyStateIcon.setVisibility(View.GONE);
             emptyStateMessage.setVisibility(View.GONE);
             Log.d("ContactListActivity", "Lista de contactos no está vacía");
         }
     }
-    public void updateContactsList() {
-        adapter.notifyDataSetChanged();
+    private void updateContactsList() {
+        dbHelper dbHelper = new dbHelper(this);
+        adapter = new ContactoAdapter(dbHelper.getAllContacts());
+        recyclerView.setAdapter(adapter);
         updateContactsView();
     }
 
@@ -125,5 +135,6 @@ public class ContactListActivity extends AppCompatActivity {
             updateContactsList();
         }
     }
+
 
 }
