@@ -14,71 +14,71 @@
 
         <ImageView
             android:id="@+id/contactImageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/contact_image"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/contact_image" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="5dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/nombreTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nombre"
+                android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/apellidoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Apellido"
-                android:textSize="16sp"
                 android:textColor="@android:color/black"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/telefonoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="4dp"
                 android:text="Teléfono"
-                android:textSize="14sp"
                 android:textColor="@android:color/darker_gray"
-                android:paddingTop="4dp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <!-- Botón para simular una llamada -->
         <ImageView
             android:id="@+id/callButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_marginStart="10dp"
-            android:src="@drawable/sym_call"
-            android:contentDescription="@string/call_button" />
+            android:contentDescription="@string/call_button"
+            android:src="@drawable/sym_call" />
 
         <ImageView
             android:id="@+id/editButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="10dp"
-            android:src="@drawable/ic_edit"
-            android:contentDescription="@string/edit_button" />
+            android:contentDescription="@string/edit_button"
+            android:src="@drawable/ic_edit" />
 
         <ImageView
             android:id="@+id/deleteButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="10dp"
-            android:src="@drawable/ic_delete"
-            android:contentDescription="@string/delete_button" />
+            android:contentDescription="@string/delete_button"
+            android:src="@drawable/ic_delete" />
     </LinearLayout>
 
 </LinearLayout>
