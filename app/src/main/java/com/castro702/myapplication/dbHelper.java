@@ -144,9 +144,9 @@ public class dbHelper extends SQLiteOpenHelper {
         return db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{String.valueOf(contacto.getId())});
     }
 
-    public void deleteContact(Contacto contacto) {
+    public void deleteContact(int contactId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{String.valueOf(contacto.getId())});
+        db.delete("contactos", "id = ?", new String[]{String.valueOf(contactId)});
         db.close();
     }
 

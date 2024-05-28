@@ -7,4 +7,8 @@
     <string name="save_contact">Guardar contacto</string>
 
     <string name="call_button">Call button</string>
+
+    <string name="edit_button">Editar</string>
+    <string name="delete_button">Eliminar</string>
+
 </resources>

@@ -26,6 +26,10 @@
         </activity>
         <activity
             android:name=".activity_contact_list"
+            android:exported="false"/>
+
+        <activity
+            android:name=".EditContactActivity"
             android:exported="false" />
     </application>
 

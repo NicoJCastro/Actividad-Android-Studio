@@ -63,6 +63,22 @@
             android:layout_marginStart="10dp"
             android:src="@drawable/sym_call"
             android:contentDescription="@string/call_button" />
+
+        <ImageView
+            android:id="@+id/editButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="@string/edit_button" />
+
+        <ImageView
+            android:id="@+id/deleteButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="@string/delete_button" />
     </LinearLayout>
 
 </LinearLayout>
