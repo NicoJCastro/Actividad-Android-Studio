@@ -12,14 +12,14 @@ public class activity_contact_list extends AppCompatActivity {
 
     private EditText editTextNombre, editTextApellido, editTextTelefono, editTextDomicilio, editTextEmail;
     private RadioGroup radioGroupGenero;
-    private dbHelper db;
+    private dataBaseContact db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        db = new dbHelper(this);
+        db = new dataBaseContact(this);
 
         editTextNombre = findViewById(R.id.editTextNombre);
         editTextApellido = findViewById(R.id.editTextApellido);

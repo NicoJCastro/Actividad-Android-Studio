@@ -26,19 +26,19 @@ public class ContactListActivity extends AppCompatActivity implements ContactoAd
     private ContactoAdapter adapter;
     private ImageView emptyStateIcon;
     private TextView emptyStateMessage;
-    private dbHelper dbHelper;
+    private dataBaseContact dataBaseContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_list);
 
-        dbHelper = new dbHelper(this);
+        dataBaseContact = new dataBaseContact(this);
 
         recyclerView = findViewById(R.id.recyclerViewContactos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new ContactoAdapter(dbHelper.getAllContacts(), this);
+        adapter = new ContactoAdapter(dataBaseContact.getAllContacts(), this);
         recyclerView.setAdapter(adapter);
 
         emptyStateIcon = findViewById(R.id.emptyStateIcon);
@@ -88,7 +88,7 @@ public class ContactListActivity extends AppCompatActivity implements ContactoAd
     }
 
     private void updateContactsView() {
-        List<Contacto> contactos = dbHelper.getAllContacts();
+        List<Contacto> contactos = dataBaseContact.getAllContacts();
         if (contactos.isEmpty()) {
             emptyStateIcon.setVisibility(View.VISIBLE);
             emptyStateMessage.setVisibility(View.VISIBLE);
@@ -101,7 +101,7 @@ public class ContactListActivity extends AppCompatActivity implements ContactoAd
     }
 
     private void updateContactsList() {
-        adapter = new ContactoAdapter(dbHelper.getAllContacts(), this);
+        adapter = new ContactoAdapter(dataBaseContact.getAllContacts(), this);
         recyclerView.setAdapter(adapter);
         updateContactsView();
     }
@@ -123,7 +123,7 @@ public class ContactListActivity extends AppCompatActivity implements ContactoAd
 
     @Override
     public void onDeleteClick(Contacto contacto) {
-        dbHelper.deleteContact(contacto.getId());
+        dataBaseContact.deleteContact(contacto.getId());
         updateContactsList();
         Toast.makeText(this, "Contacto eliminado", Toast.LENGTH_SHORT).show();
     }

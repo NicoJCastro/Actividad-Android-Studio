@@ -1,6 +1,5 @@
 package com.castro702.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -22,7 +21,7 @@ public class EditContactActivity extends AppCompatActivity {
     private RadioButton masculinoRadioButton;
     private RadioButton femeninoRadioButton;
     private Button saveButton;
-    private dbHelper dbHelper;
+    private dataBaseContact dataBaseContact;
     private int contactId;
 
     @Override
@@ -30,7 +29,7 @@ public class EditContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
 
-        dbHelper = new dbHelper(this);
+        dataBaseContact = new dataBaseContact(this);
 
         nombreEditText = findViewById(R.id.nombreEditText);
         apellidoEditText = findViewById(R.id.apellidoEditText);
@@ -43,7 +42,7 @@ public class EditContactActivity extends AppCompatActivity {
 
         contactId = getIntent().getIntExtra("contact_id", -1);
         if (contactId != -1) {
-            Contacto contacto = dbHelper.getContact(contactId);
+            Contacto contacto = dataBaseContact.getContact(contactId);
             if (contacto != null) {
                 nombreEditText.setText(contacto.getNombre());
                 apellidoEditText.setText(contacto.getApellido());
@@ -85,7 +84,7 @@ public class EditContactActivity extends AppCompatActivity {
 
         Contacto contacto = new Contacto(contactId, nombre, apellido, telefono, domicilio, email, genero);
 
-        dbHelper.updateContact(contacto);
+        dataBaseContact.updateContact(contacto);
 
         Toast.makeText(this, "Contacto actualizado", Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);

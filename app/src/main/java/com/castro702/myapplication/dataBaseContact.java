@@ -10,7 +10,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class dbHelper extends SQLiteOpenHelper {
+public class dataBaseContact extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "contactos.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -23,8 +23,9 @@ public class dbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_GENERO = "genero";
 
-    public dbHelper(Context context) {
+    public dataBaseContact(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        Log.d("dbHelper", "Base de datos creada");
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -37,6 +38,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 + COLUMN_EMAIL + " TEXT,"
                 + COLUMN_GENERO + " TEXT" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
+        Log.d("dataBaseContact", "Tabla creada");
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -55,9 +57,9 @@ public class dbHelper extends SQLiteOpenHelper {
 
         long resultado = db.insert(TABLE_NAME, null, values);
         if (resultado != -1) {
-            Log.d("dbHelper", "Contacto agregado: " + contacto.getNombre() + " " + contacto.getApellido());
+            Log.d("dataBaseContact", "Contacto agregado: " + contacto.getNombre() + " " + contacto.getApellido());
         } else {
-            Log.e("dbHelper", "Error al agregar contacto: " + contacto.getNombre() + " " + contacto.getApellido());
+            Log.e("dataBaseContact", "Error al agregar contacto: " + contacto.getNombre() + " " + contacto.getApellido());
         }
 
         db.close();
